@@ -5,6 +5,7 @@ $(document).ready(function () {
         var nomVille = $('#nomVille').val();
         e.preventDefault();
         if(ville != nomVille)
+        
             GetMeteo(nomVille);
         ville = nomVille;
     });
