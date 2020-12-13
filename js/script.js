@@ -1,24 +1,26 @@
-$(document).ready(function () {
+ville = "";
+document.querySelector('#form').addEventListener('submit', (e) => {
+    e.preventDefault();
 
-    ville = "";
-    $('#form').submit((e) => {
-        var nomVille = $('#nomVille').val();
-        e.preventDefault();
-        if(ville != nomVille)
-        
-            GetMeteo(nomVille);
-        ville = nomVille;
-    });
+    var nomVille = document.querySelector('#nomVille').value;
+
+    if(ville != nomVille)
+        GetMeteo(nomVille);
+
+    ville = nomVille;
 });
 
 function GetMeteo(name){
-    var url = 'http://api.openweathermap.org/data/2.5/weather?APPID=1462b2063b2bf2916d8ba369e56a5241&q=' + name + '&units=metric';
+    var url = 'http://api.openweathermap.org/data/2.5/weather?APPID=1462b2063b2bf2916d8ba369e56a5241&q=' + name + '&units=metric&lang=fr';
 
-    $.getJSON(url, function(data) {
+    fetch(url).then(function(response) {
+        return response.json();
+    }).then(function(data) {
         var gmtNow = new Date(new Date().toUTCString());
         var gmt = data.timezone / 3600;
         var heureLocale = new Date(gmtNow.getTime() + 3600000 * gmt).toISOString();
-        $("#tableau").html(
+
+        document.querySelector("#tableau").innerHTML = 
             "<tr>" +
                 "<td><h1>" + data.name + "</h1></td>" +
             "</tr>"+
@@ -41,14 +43,14 @@ function GetMeteo(name){
                 "<td>Humidité : " + data.main.humidity + "%</td>" +
             "</tr>" +
             "<tr>" +
-                "<td>Pays : " + getCountryName(data.sys.country) + "</td>" +
+                "<td>Pays : " + getCountryName(data.sys.country) + "</td>" + //ou ct.getCountry(data.sys.country).name ct viens du script js
             "</tr>" +
             "<tr>" +
-                "<td>Heure de cette météo : " + new Date(new Date - data.dt).toISOString({hour: 'numeric', minute:'numeric'}) + "</td>" +
+                "<td>Heure de cette météo : " + new Date(data.dt * 1000).toISOString() + "</td>" +
             "</tr>" +
             "<tr>" +
                 "<td>Heure locale : " + heureLocale + "</td>" +
-            "</tr>"
-        );
+            "</tr>";
     });
 }
+
