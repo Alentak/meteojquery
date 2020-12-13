@@ -11,7 +11,7 @@ document.querySelector('#form').addEventListener('submit', (e) => {
 });
 
 function GetMeteo(name){
-    var url = 'http://api.openweathermap.org/data/2.5/weather?APPID=1462b2063b2bf2916d8ba369e56a5241&q=' + name + '&units=metric&lang=fr';
+    var url = 'https://api.openweathermap.org/data/2.5/weather?APPID=1462b2063b2bf2916d8ba369e56a5241&q=' + name + '&units=metric&lang=fr';
 
     fetch(url).then(function(response) {
         return response.json();
@@ -30,7 +30,7 @@ function GetMeteo(name){
             "<tr>" +
                 "<td>" + 
                 "Temps : " + data.weather[0].description + 
-                "<br><img src='http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png'>" +
+                "<br><img src='https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png'>" +
                 "</td>" +
             "</tr>" +
             "<tr>" +
