@@ -74,7 +74,7 @@ function showWeather(city) {
     });
 
     //Set city parameter in URL
-    let url = new URL('http://127.0.0.1:5500/current.html');
+    let url = new URL('https://paulguillon.github.io/meteojs/current.html');
     url.searchParams.set('city', city);
     window.history.replaceState(null, null, url);
 
