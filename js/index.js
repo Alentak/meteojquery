@@ -4,7 +4,7 @@ document.querySelector('#searchForm').addEventListener('submit', (e) => {
 
     let searchValue = document.querySelector('#search').value;
 
-    window.location.href = `./current.html?city=${searchValue}`;
+    window.location.href = `./weather.html?city=${searchValue}`;
 });
 
 //Nav form
@@ -13,5 +13,5 @@ document.querySelector('#navSearchForm').addEventListener('submit', (e) => {
 
     let navSearchValue = document.querySelector('#navSearch').value;
 
-    window.location.href = `./current.html?city=${navSearchValue}`;
+    window.location.href = `./weather.html?city=${navSearchValue}`;
 });
