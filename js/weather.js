@@ -81,13 +81,13 @@ async function showWeather() {
                 <p class="card-text"><i class='fas fa-thermometer-quarter text-danger'></i> ressentie : ${data.main.feels_like}°C</p>
                 <p class="card-text"><i class="fas fa-tint text-info"></i> ${data.main.humidity}%</p>
                 <p class="card-text"><i class="fas fa-wind text-info"></i> ${data.wind.speed}km/h</p>
-                <p class="card-text"><i class="far fa-clock"></i> de cette météo : ${format(data.dt * 1000)}</p>
+                <p class="card-text"><i class="far fa-clock"></i> de cette météo : ${format(data.dt * 1000 + 3600000 * gmt)}</p>
                 <p class="card-text"><i class="far fa-clock"></i> locale : <span id="localeHourSpan">${format(heureLocale)}</span></p>
             </div>
         </div>
     `;
     //Set city parameter in URL
-    let url = new URL('http://127.0.0.1:5500/current.html');
+    let url = new URL(window.location.origin+'/current.html');
     url.searchParams.set('city', city);
     window.history.replaceState(null, null, url);
 }
