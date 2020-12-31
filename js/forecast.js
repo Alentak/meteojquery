@@ -1,4 +1,4 @@
-let apiUrl = 'http://api.openweathermap.org/data/2.5/forecast?appid=1462b2063b2bf2916d8ba369e56a5241&q=beuzeville&units=metric'
+let apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?appid=1462b2063b2bf2916d8ba369e56a5241&q=beuzeville&units=metric'
 
 let jours = {};
 
