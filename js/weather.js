@@ -1,5 +1,15 @@
-let city = '';
+let city, previousCity;
 let timezone = 0;
+let mymap = L.map('mymap');
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'your.mapbox.access.token'
+}).addTo(mymap);
 
 let urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('city') && urlParams.get('city') != null){
@@ -31,8 +41,10 @@ document.querySelector('#navSearchForm').addEventListener('submit', (e) => {
 });
 
 function fillInputs(){
-    document.querySelector('#search').value = city.replace(city[0], city[0].toUpperCase());
-    document.querySelector('#navSearch').value = city.replace(city[0], city[0].toUpperCase());
+    let upperCity = city.replace(city[0], city[0].toUpperCase());
+    document.querySelector('#search').value = upperCity;
+    document.querySelector('#navSearch').value = upperCity;
+    city = upperCity;
 }
 
 
@@ -40,8 +52,10 @@ function fillInputs(){
  * Display weather
  */
 async function showWeather() {
-    if(city == '')
+    if(city == previousCity)
         return;
+    else
+        previousCity = city;
 
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?APPID=1462b2063b2bf2916d8ba369e56a5241&q=${city}&units=metric&lang=fr`;
 
@@ -86,10 +100,20 @@ async function showWeather() {
             </div>
         </div>
     `;
+
     //Set city parameter in URL
     let url = new URL(window.location.origin+'/current.html');
     url.searchParams.set('city', city);
     window.history.replaceState(null, null, url);
+
+    mymap.setView([data.coord.lat, data.coord.lon], 13);
+
+    // Clear all markers
+
+    // Add a marker on the desired city
+    let marker = L.marker([data.coord.lat, data.coord.lon]).addTo(mymap);
+    // Popup on marker
+    marker.bindPopup(`<b>${data.name}</b>`);
 }
 
 //Refresh weather every 60sec
