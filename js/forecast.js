@@ -1,4 +1,4 @@
-let apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?appid=1462b2063b2bf2916d8ba369e56a5241&q=beuzeville&units=metric'
+let apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?appid=1462b2063b2bf2916d8ba369e56a5241&q=beuzeville&units=metric&lang=fr'
 
 let jours = {};
 
@@ -16,7 +16,7 @@ fetch(apiUrl).then(function (response) {
     let textHtml = '';
 
     textHtml = `<h1 style="font-family: 'Operator Mono Lig Light';">À beuzeville</h1>`
-    
+    console.log(jours)
     textHtml += `<table cellpadding="5" style="font-family: 'Operator Mono Lig Light';text-align:center;background-color:lightgray;">`
         textHtml += `<thead style="background-color:gray;color:white">`
             textHtml += `<tr>`
@@ -35,6 +35,7 @@ fetch(apiUrl).then(function (response) {
                         <td>
                             ${j.dt_txt.substr(11,5).split(':')[0]}h 
                             <img src="https://openweathermap.org/img/wn/${j.weather[0].icon}@2x.png">
+                            ${j.weather[0].description}
                             ${+j.main.temp}°C
                         </td>`
                 })
