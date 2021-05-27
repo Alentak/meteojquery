@@ -1,9 +1,0 @@
-:root{
-    font-size: 14px;
-}
-main{
-    font-size: 1.5rem;
-}
-#forecast th, td{
-    border:3px solid lightgray;
-}
