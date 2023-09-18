@@ -9,4 +9,4 @@ Font Awesome
 
 ### Mobile
 
-![Maquette_mobile](https://raw.githubusercontent.com/paulguillon/meteojs/master/src/assets/readme/maquette_mobile.jpg)
+![Maquette_mobile](https://raw.githubusercontent.com/paulguillon/meteojs/master/src/maquette_mobile.jpg)
